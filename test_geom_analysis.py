@@ -1,33 +1,34 @@
-import pytest
-import geom_analysis as ga
+import unittest
+from geom_analysis import say_hi
 
-def test_calculate_distance():
-    coord1 = [0, 0, 0]
-    coord2 = [1, 0, 0]
-    expected = 1.0
-    observed = ga.calculate_distance(coord1,coord2)
-    assert observed == expected
+import unittest
 
-def test_bond_check_true():
-    bond_distance = 1.2
-    expected = True
-    observed = ga.bond_check(bond_distance)
-    assert observed == expected
+class MyTestClass(unittest.TestCase):
 
-def test_bond_check_false():
-    bond_distance = 2.0
-    expected = False
-    observed = ga.bond_check(bond_distance)
-    assert observed == expected
+    def test_say_hi(self):
+        """Tests teh say_hi function."""
+        name = None
+        self.assertIsNotNone(say_hi(name))
+        self.assertEqual(say_hi(name), "Please introduce yourself...")
+        name = 3
+        self.assertEqual(say_hi(name), f"Hey {name}! It's so nice meeting you!")
+        name = "George"
+        self.assertEqual(say_hi(name), f"Hey {name}! It's so nice meeting you!")
+    
+    def test_say_hi_none(self):
+        """Tests teh say_hi function."""
+        name = None
+        self.assertIsNotNone(say_hi(name))
 
-def test_bond_check_0():
-    bond_distance = 0
-    expected = False
-    observed = ga.bond_check(bond_distance)
-    assert observed == expected
+    def test_say_hi_int(self):
+        """Tests teh say_hi function."""
+        name = 3
+        self.assertEqual(say_hi(name), f"Hey {name}! It's so nice meeting you!")
 
-def test_bond_check_1_5():
-    bond_distance = 1.5
-    expected = True
-    observed = ga.bond_check(bond_distance)
-    assert observed == expected
+    def test_say_hi_name(self):
+        """Tests teh say_hi function."""
+        name = "George"
+        self.assertEqual(say_hi(name), f"Hey {name}! It's so nice meeting you!")
+
+if __name__ == "__main__":
+    unittest.test_geom_analysis()
